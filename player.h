@@ -9,14 +9,14 @@ class Player {
     QLabel *QScore;
     QLabel *QName;
 public:
-    Player();
-    ~Player();
-    Player(std::string);
-    QLabel *getName();
-    void setName(std::string);
-    QLabel *getScore();
-    void setScore(int);
-    void addScore(int);
+    Player();                   // constructor
+    ~Player();                  // destructor
+    Player(std::string);        // constructor with player name
+    QLabel *getName();          // accessor/mutator functions
+    void setName(std::string);  // |
+    QLabel *getScore();         // |
+    void setScore(int);         // |
+    void addScore(int);         // v
 };
 
 #endif // PLAYER_H

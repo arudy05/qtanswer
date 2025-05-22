@@ -22,6 +22,9 @@ QLabel *Player::getScore() {
 }
 
 void Player::setScore(int val) {
+    // score is stored as an integer and operated on so that
+    // having to pull the value from a QLabel's text is never
+    // necessary (it seems like a headache I would rather avoid)
     score = val;
     QScore->setText(QString::number(score));
 }

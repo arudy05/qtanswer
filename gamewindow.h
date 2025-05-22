@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QGridLayout>
 #include <QPushButton>
-#include <QLabel>
 #include <vector>
 #include "player.h"
 
@@ -14,12 +13,12 @@ class GameWindow : public QWidget
 {
     Q_OBJECT
     QGridLayout *layout;
-    std::vector<QPushButton*> tiles;
-    std::vector<Player*> players;
+    std::vector<QPushButton*> tiles;    // Clue tiles
+    std::vector<Player*> players;       // Player objects
 
 public:
-    explicit GameWindow(QWidget *parent = nullptr);
-    ~GameWindow();
+    explicit GameWindow(QWidget *parent = nullptr); // Constructor
+    ~GameWindow();                                  // Destructor
 
 signals:
 
