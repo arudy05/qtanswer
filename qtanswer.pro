@@ -8,8 +8,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 SOURCES += \
     gamewindow.cc \
     main.cc \
-    player.cc
+    player.cc \
+    tile.cc
 
 HEADERS += \
     gamewindow.h \
-    player.h
+    player.h \
+    tile.h

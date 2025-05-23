@@ -7,8 +7,9 @@ GameWindow::GameWindow(QWidget *parent) : QWidget{parent}, layout{new QGridLayou
     // at the top left of the grid.
     for (int i = 0; i<30; ++i) {
         std::cout << i << std::endl;
-        tiles.push_back(new QPushButton(QString::number(((i/6)+1)*200)));
-        layout->addWidget(tiles[i], i/6, i%6);
+        tiles.push_back(new Tile(((i/6)+1)*200, i%6+1));
+        layout->addWidget(tiles[i]->button, i/6, i%6);
+        connect(tiles[i], SIGNAL (tilePressed(int, int)), this, SLOT (onTileSelect(int, int)));
     }
 
     // 3 players - in the future you should be able to add a custom amount of players.
@@ -22,10 +23,14 @@ GameWindow::GameWindow(QWidget *parent) : QWidget{parent}, layout{new QGridLayou
 }
 
 GameWindow::~GameWindow() {
-    for (int i = 0; i < 30; ++i) {
-        delete tiles[i];
-    }
-    for (int i = 0; i < 3; ++i) {
-        delete players[i];
-    }
+    // All tile and player objects were allocated by us, therefore we have to make
+    // sure that all memory is freed properly.
+    for (int i = 0; i < 30; ++i) delete tiles[i];
+    for (int i = 0; i < 3;  ++i) delete players[i];
+}
+
+void GameWindow::onTileSelect(int val, int cat) {
+    // In the future this will select the clue of corresponding value and category
+    // and display it. For now, we just add the value to the first player's score.
+    players[0]->addScore(val);
 }

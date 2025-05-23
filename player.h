@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <string>
 
+// Each Player object represents one of the players in the game.
 class Player {
     int score;
     QLabel *QScore;

@@ -3,24 +3,24 @@
 
 #include <QWidget>
 #include <QGridLayout>
-#include <QPushButton>
 #include <vector>
+#include "tile.h"
 #include "player.h"
 
-class QPushButton;
-
+// The main game board, plus player scores.
 class GameWindow : public QWidget
 {
     Q_OBJECT
     QGridLayout *layout;
-    std::vector<QPushButton*> tiles;    // Clue tiles
-    std::vector<Player*> players;       // Player objects
+    std::vector<Tile*> tiles;       // Clue tiles
+    std::vector<Player*> players;   // Players and scores
 
 public:
-    explicit GameWindow(QWidget *parent = nullptr); // Constructor
-    ~GameWindow();                                  // Destructor
+    explicit GameWindow(QWidget *parent = nullptr);
+    ~GameWindow();
 
-signals:
+public slots:
+    void onTileSelect(int val, int cat);
 
 };
 
