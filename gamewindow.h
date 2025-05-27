@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGridLayout>
+#include <QLabel>
 #include <vector>
 #include "tile.h"
 #include "player.h"
@@ -12,8 +13,9 @@ class GameWindow : public QWidget
 {
     Q_OBJECT
     QGridLayout *layout;
-    std::vector<Tile*> tiles;       // Clue tiles
-    std::vector<Player*> players;   // Players and scores
+    std::vector<QLabel*> catHeaders;    // Category headers
+    std::vector<Tile*> tiles;           // Clue tiles
+    std::vector<Player*> players;       // Players and scores
 
 public:
     explicit GameWindow(QWidget *parent = nullptr);

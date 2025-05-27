@@ -1,6 +1,11 @@
 #include "gamewindow.h"
 #include <iostream>
 GameWindow::GameWindow(QWidget *parent) : QWidget{parent}, layout{new QGridLayout (this)} {
+    // Category headers: leave text as "default" for now.
+    for (int i = 0; i < 6; ++i) {
+        catHeaders.push_back(new QLabel("default"));
+        layout->addWidget(catHeaders[i], 0, i, Qt::AlignCenter);
+    }
 
     // 30 tiles - 5 for each of the 6 categories, arranged in the vector such that
     // index [i*6+j] corresponds to the (i+1)th question of the (j+1)th category starting
@@ -8,7 +13,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget{parent}, layout{new QGridLayou
     for (int i = 0; i<30; ++i) {
         std::cout << i << std::endl;
         tiles.push_back(new Tile(((i/6)+1)*200, i%6+1));
-        layout->addWidget(tiles[i]->button, i/6, i%6);
+        layout->addWidget(tiles[i]->button, i/6+1, i%6);
         connect(tiles[i], SIGNAL (tilePressed(int, int)), this, SLOT (onTileSelect(int, int)));
     }
 
