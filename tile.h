@@ -14,6 +14,7 @@ public:
     QPushButton *button;
     Tile(int val, int cat);
     ~Tile();
+    void disable();
 
 public slots:
     void onButtonPress();

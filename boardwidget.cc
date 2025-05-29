@@ -21,7 +21,7 @@ BoardWidget::BoardWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLay
     // QLabels for each player's name and score are stored in the Player objects themselves,
     for (int i = 0; i<3; ++i) {
         players.push_back(new Player());
-        layout->addWidget(players[i]->getName(), 6, i*2, 1, 2, Qt::AlignCenter);
+        layout->addWidget(players[i]->getName(),  6, i*2, 1, 2, Qt::AlignCenter);
         layout->addWidget(players[i]->getScore(), 7, i*2, 1, 2, Qt::AlignCenter);
     }
 
@@ -34,8 +34,17 @@ BoardWidget::~BoardWidget() {
     for (int i = 0; i < 3;  ++i) delete players[i];
 }
 
+const Tile *BoardWidget::getTile(int ind) {
+    return tiles[ind];
+}
+
 void BoardWidget::onTileSelect(int val, int cat) {
     // In the future this will select the clue of corresponding value and category
     // and display it. For now, we just add the value to the first player's score.
-    players[0]->addScore(val);
+    int q = val/200 -1;
+    tiles[q*6+cat-1]->disable();
+}
+
+void BoardWidget::onTileReturn(int player, int score) {
+    players[player]->addScore(score);
 }

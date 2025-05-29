@@ -11,6 +11,10 @@ Tile::~Tile() {
     delete button;
 }
 
+void Tile::disable() {
+    button->setDisabled(true);
+}
+
 void Tile::onButtonPress() {
     // When the button is pressed, emit a signal with this tile's
     // value and category so that the game pulls the proper question.
