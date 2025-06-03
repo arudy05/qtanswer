@@ -6,18 +6,18 @@ QT = core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += \
-    boardwidget.cc \
-    buzzer.cc \
-    cluewidget.cc \
-    gamewindow.cc \
-    main.cc \
-    player.cc \
-    tile.cc
+    src/boardwidget.cc \
+    src/buzzer.cc \
+    src/cluewidget.cc \
+    src/gamewindow.cc \
+    src/main.cc \
+    src/player.cc \
+    src/tile.cc
 
 HEADERS += \
-    boardwidget.h \
-    buzzer.h \
-    cluewidget.h \
-    gamewindow.h \
-    player.h \
-    tile.h
+    include/boardwidget.h \
+    include/buzzer.h \
+    include/cluewidget.h \
+    include/gamewindow.h \
+    include/player.h \
+    include/tile.h
