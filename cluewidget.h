@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QTimer>
 #include <vector>
 #include "buzzer.h"
 
@@ -14,6 +15,9 @@ class ClueWidget : public QWidget {
     QLabel *category;
     QLabel *clue;
     int val;
+    int countdown;
+    QTimer *countdownTimer;
+    QLabel *countdownText;
     std::vector<Buzzer*> buzzers;
 public:
     explicit ClueWidget(QWidget *parent = nullptr);
@@ -21,6 +25,7 @@ public:
 public slots:
     void selectClue(int val, int cat);
     void playerBuzzIn(int p);
+    void tickDown();
 
 signals:
     void clueReturn (int player, int val);
