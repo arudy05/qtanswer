@@ -21,6 +21,7 @@ class ClueWidget : public QWidget {
     std::vector<Buzzer*> buzzers;
 public:
     explicit ClueWidget(QWidget *parent = nullptr);
+    ~ClueWidget();
 
 public slots:
     void selectClue(int val, int cat);

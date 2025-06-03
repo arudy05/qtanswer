@@ -20,6 +20,16 @@ ClueWidget::ClueWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayou
     connect(countdownTimer, SIGNAL (timeout()), this, SLOT(tickDown()));
 }
 
+ClueWidget::~ClueWidget() {
+    // no leaks here (i hope)
+    delete layout;
+    delete category;
+    delete clue;
+    delete countdownTimer;
+    delete countdownText;
+    for (int i=0; i<3; ++i) delete buzzers[i];
+}
+
 void ClueWidget::selectClue(int value, int cat) {
     // Set category and clue text (currently temporary text)
     category->setText("Category " + QString::number(cat));
