@@ -15,9 +15,9 @@ SOURCES += \
     src/tile.cc
 
 HEADERS += \
-    include/boardwidget.h \
-    include/buzzer.h \
-    include/cluewidget.h \
-    include/gamewindow.h \
-    include/player.h \
-    include/tile.h
+    src/boardwidget.h \
+    src/buzzer.h \
+    src/cluewidget.h \
+    src/gamewindow.h \
+    src/player.h \
+    src/tile.h
