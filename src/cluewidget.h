@@ -6,19 +6,23 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <QTimer>
+#include <QProgressBar>
 #include <vector>
 #include "buzzer.h"
 
 class ClueWidget : public QWidget {
     Q_OBJECT
-    QGridLayout *layout;
-    QLabel *category;
-    QLabel *clue;
-    int val;
-    int countdown;
-    QTimer *countdownTimer;
-    QLabel *countdownText;
-    std::vector<Buzzer*> buzzers;
+    QGridLayout *layout;            // layout
+    QLabel *category;               // category name display
+    QLabel *clue;                   // clue body display
+    int val;                        // how much this clue is worth
+    int countdown;                  // countdown stuff
+    QTimer *countdownTimer;         // |
+    QLabel *countdownText;          // |
+    QProgressBar *countdownBarL;    // |
+    QProgressBar *countdownBarR;    // v
+    std::vector<Buzzer*> buzzers;   // player buzzers
+
 public:
     explicit ClueWidget(QWidget *parent = nullptr);
     ~ClueWidget();
