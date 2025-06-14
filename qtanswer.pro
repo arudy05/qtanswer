@@ -12,7 +12,8 @@ SOURCES += \
     src/gamewindow.cc \
     src/main.cc \
     src/player.cc \
-    src/tile.cc
+    src/tile.cc \
+    src/cluefile.cc
 
 HEADERS += \
     src/boardwidget.h \
@@ -20,4 +21,5 @@ HEADERS += \
     src/cluewidget.h \
     src/gamewindow.h \
     src/player.h \
-    src/tile.h
+    src/tile.h \
+    src/cluefile.h

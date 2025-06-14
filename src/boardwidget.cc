@@ -1,9 +1,11 @@
 #include "boardwidget.h"
-#include <iostream>
+#include "cluefile.h"
 BoardWidget::BoardWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout (this)} {
-    // Category headers: leave text as "default" for now.
+    // Open categories.json file; the cluefile object will be deleted once this function is done running
+    ClueFile file;
+    // Get category headers from file
     for (int i = 0; i < 6; ++i) {
-        catHeaders.push_back(new QLabel("default"));
+        catHeaders.push_back(new QLabel(QString::fromStdString(file.getCategory(i))));
         layout->addWidget(catHeaders[i], 0, i, Qt::AlignCenter);
     }
 
@@ -11,7 +13,6 @@ BoardWidget::BoardWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLay
     // index [i*6+j] corresponds to the (i+1)th question of the (j+1)th category starting
     // at the top left of the grid.
     for (int i = 0; i<30; ++i) {
-        std::cout << i << std::endl;
         tiles.push_back(new Tile(((i/6)+1)*200, i%6+1));
         layout->addWidget(tiles[i]->button, i/6+1, i%6);
         connect(tiles[i], SIGNAL (tilePressed(int, int)), this, SLOT (onTileSelect(int, int)));

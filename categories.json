@@ -1,0 +1,256 @@
+{
+    "categories": [
+        {
+            "name": "Category A",
+            "clues": [
+                {
+                    "clue": "Question A1",
+                    "answers": [
+                        "Answer A11",
+                        "Answer A12"
+                    ]
+                },
+                {
+                    "clue": "Question A2",
+                    "answers": [
+                        "Answer A21",
+                        "Answer A22",
+                        "Answer A23"
+                    ]
+                },
+                {
+                    "clue": "Question A3",
+                    "answers": [
+                        "Answer A31"
+                    ]
+                },
+                {
+                    "clue": "Question A4",
+                    "answers": [
+                        "Answer A41",
+                        "Answer A42",
+                        "Answer A43",
+                        "Answer A44"
+                    ]
+                },
+                {
+                    "clue": "Question A5",
+                    "answers": [
+                        "Answer A51",
+                        "Answer A52"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Category B",
+            "clues": [
+                {
+                    "clue": "Question B1",
+                    "answers": [
+                        "Answer B11",
+                        "Answer B12"
+                    ]
+                },
+                {
+                    "clue": "Question B2",
+                    "answers": [
+                        "Answer B21",
+                        "Answer B22",
+                        "Answer B23"
+                    ]
+                },
+                {
+                    "clue": "Question B3",
+                    "answers": [
+                        "Answer B31"
+                    ]
+                },
+                {
+                    "clue": "Question B4",
+                    "answers": [
+                        "Answer B41",
+                        "Answer B42",
+                        "Answer B43",
+                        "Answer B44"
+                    ]
+                },
+                {
+                    "clue": "Question B5",
+                    "answers": [
+                        "Answer B51",
+                        "Answer B52"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Category C",
+            "clues": [
+                {
+                    "clue": "Question C1",
+                    "answers": [
+                        "Answer C11",
+                        "Answer C12"
+                    ]
+                },
+                {
+                    "clue": "Question C2",
+                    "answers": [
+                        "Answer C21",
+                        "Answer C22",
+                        "Answer C23"
+                    ]
+                },
+                {
+                    "clue": "Question C3",
+                    "answers": [
+                        "Answer C31"
+                    ]
+                },
+                {
+                    "clue": "Question C4",
+                    "answers": [
+                        "Answer C41",
+                        "Answer C42",
+                        "Answer C43",
+                        "Answer C44"
+                    ]
+                },
+                {
+                    "clue": "Question C5",
+                    "answers": [
+                        "Answer C51",
+                        "Answer C52"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Category D",
+            "clues": [
+                {
+                    "clue": "Question D1",
+                    "answers": [
+                        "Answer D11",
+                        "Answer D12"
+                    ]
+                },
+                {
+                    "clue": "Question D2",
+                    "answers": [
+                        "Answer D21",
+                        "Answer D22",
+                        "Answer D23"
+                    ]
+                },
+                {
+                    "clue": "Question D3",
+                    "answers": [
+                        "Answer D31"
+                    ]
+                },
+                {
+                    "clue": "Question D4",
+                    "answers": [
+                        "Answer D41",
+                        "Answer D42",
+                        "Answer D43",
+                        "Answer D44"
+                    ]
+                },
+                {
+                    "clue": "Question D5",
+                    "answers": [
+                        "Answer D51",
+                        "Answer D52"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Category E",
+            "clues": [
+                {
+                    "clue": "Question E1",
+                    "answers": [
+                        "Answer E11",
+                        "Answer E12"
+                    ]
+                },
+                {
+                    "clue": "Question E2",
+                    "answers": [
+                        "Answer E21",
+                        "Answer E22",
+                        "Answer E23"
+                    ]
+                },
+                {
+                    "clue": "Question E3",
+                    "answers": [
+                        "Answer E31"
+                    ]
+                },
+                {
+                    "clue": "Question E4",
+                    "answers": [
+                        "Answer E41",
+                        "Answer E42",
+                        "Answer E43",
+                        "Answer E44"
+                    ]
+                },
+                {
+                    "clue": "Question E5",
+                    "answers": [
+                        "Answer E51",
+                        "Answer E52"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Category F",
+            "clues": [
+                {
+                    "clue": "Question F1",
+                    "answers": [
+                        "Answer F11",
+                        "Answer F12"
+                    ]
+                },
+                {
+                    "clue": "Question F2",
+                    "answers": [
+                        "Answer F21",
+                        "Answer F22",
+                        "Answer F23"
+                    ]
+                },
+                {
+                    "clue": "Question F3",
+                    "answers": [
+                        "Answer F31"
+                    ]
+                },
+                {
+                    "clue": "Question F4",
+                    "answers": [
+                        "Answer F41",
+                        "Answer F42",
+                        "Answer F43",
+                        "Answer F44"
+                    ]
+                },
+                {
+                    "clue": "Question F5",
+                    "answers": [
+                        "Answer F51",
+                        "Answer F52"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -5,6 +5,7 @@ A work-in-progress Jeopardy-like trivia game using the Qt toolkit.
 ### Requirements
 - Qt 6.9.0 (other versions may or may not work since this is a relatively simple application, try it out at your own risk)
 - CMake 3.16 or higher
+- [nlohmann_json](https://github.com/nlohmann/json) 3.12.0 or higher
 ### Instructions
 Simply run the following: 
 ```
@@ -15,3 +16,6 @@ cmake ..
 cmake --build .
 ```
 The executable can be found at `<REPOSITORY LOCATION>/qtanswer/build/src/qtanswer`.
+
+## categories.json
+A template categories.json file is included in the repository. This file must be present in the directory you are running the qtanswer executable from, otherwise the program will crash (this will be fixed later). You can edit this file to your heart's content as long as you maintain its structure.

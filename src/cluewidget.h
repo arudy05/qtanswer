@@ -9,6 +9,7 @@
 #include <QProgressBar>
 #include <vector>
 #include "buzzer.h"
+#include "cluefile.h"
 
 class ClueWidget : public QWidget {
     Q_OBJECT
@@ -22,6 +23,7 @@ class ClueWidget : public QWidget {
     QProgressBar *countdownBarL;    // |
     QProgressBar *countdownBarR;    // v
     std::vector<Buzzer*> buzzers;   // player buzzers
+    ClueFile *file;                  // clues and stuff
 
 public:
     explicit ClueWidget(QWidget *parent = nullptr);

@@ -3,7 +3,7 @@
 
 ClueWidget::ClueWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout(this)}, category{new QLabel},
     clue{new QLabel}, val{0}, countdown{3}, countdownTimer{new QTimer(this)}, countdownText{new QLabel},
-    countdownBarL{new QProgressBar}, countdownBarR{new QProgressBar} {
+    countdownBarL{new QProgressBar}, countdownBarR{new QProgressBar}, file{new ClueFile} {
 
     // Initialize buzzer objects
     for (int i=0; i<3; ++i) {
@@ -37,13 +37,14 @@ ClueWidget::~ClueWidget() {
     delete countdownText;
     delete countdownBarL;
     delete countdownBarR;
+    delete file;
     for (int i=0; i<3; ++i) delete buzzers[i];
 }
 
 void ClueWidget::selectClue(int value, int cat) {
-    // Set category and clue text (currently temporary text)
-    category->setText("Category " + QString::number(cat));
-    clue->setText("Value of " + QString::number(value));
+    // Set category and clue text from file
+    category->setText(QString::fromStdString(file->getCategory(cat-1)));
+    clue->setText(QString::fromStdString(file->getClue(cat-1, value/200-1)));
     // Set point value of this clue, to be awarded to successful players.
     val = value;
     // Get countdown stuff ready - this includes disabling buzzer buttons!
