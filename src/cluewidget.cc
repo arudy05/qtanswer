@@ -42,6 +42,7 @@ ClueWidget::~ClueWidget() {
 }
 
 void ClueWidget::setPlayerNames(QString p1, QString p2, QString p3) {
+    // sets player names (these should honestly be pulled from corresponding Player objects)
     buzzers[0]->button->setText(p1);
     buzzers[1]->button->setText(p2);
     buzzers[2]->button->setText(p3);

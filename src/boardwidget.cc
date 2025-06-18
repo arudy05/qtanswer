@@ -36,22 +36,27 @@ BoardWidget::~BoardWidget() {
 }
 
 const Tile *BoardWidget::getTile(int ind) {
+    // return a given tile
     return tiles[ind];
 }
 
 void BoardWidget::setPlayerNames(QString p1, QString p2, QString p3) {
+    // takes 3 player names (from StartWidget via GameWindow) and sets them accordingly.
+    // if i am ever to accomodate for a custom amount of players this should be changed
+    // to something using vectors and a for loop but for now this works well enough
     players[0]->setName(p1);
     players[1]->setName(p2);
     players[2]->setName(p3);
 }
 
 void BoardWidget::onTileSelect(int val, int cat) {
-    // In the future this will select the clue of corresponding value and category
-    // and display it. For now, we just add the value to the first player's score.
+    // Disables tiles; other functionality is handled by GameWindow
+    // TODO: make BoardWidget emit a signal to be passed to ClueWidget
     int q = val/200 -1;
     tiles[q*6+cat-1]->disable();
 }
 
 void BoardWidget::onTileReturn(int player, int score) {
+    // Adds given score to given player
     players[player]->addScore(score);
 }

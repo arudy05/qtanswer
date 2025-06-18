@@ -16,12 +16,12 @@ QLabel *Player::getName() {
 }
 
 void Player::setName(std::string str) {
-    // Sets player's name
+    // Sets player's name (from a standard string)
     QName->setText(QString::fromStdString(str));
 }
 
 void Player::setName(QString str) {
-    // Sets player's name
+    // Sets player's name (from a QString)
     QName->setText(str);
 }
 
