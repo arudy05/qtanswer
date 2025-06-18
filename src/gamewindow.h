@@ -3,12 +3,14 @@
 
 #include <QWidget>
 #include <QStackedLayout>
+#include "startwidget.h"
 #include "boardwidget.h"
 #include "cluewidget.h"
 
 class GameWindow : public QWidget {
     Q_OBJECT
     QStackedLayout *layout;
+    StartWidget *start;
     BoardWidget *board;
     ClueWidget *clueDisplay;
 public:

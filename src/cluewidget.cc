@@ -41,6 +41,12 @@ ClueWidget::~ClueWidget() {
     for (int i=0; i<3; ++i) delete buzzers[i];
 }
 
+void ClueWidget::setPlayerNames(QString p1, QString p2, QString p3) {
+    buzzers[0]->button->setText(p1);
+    buzzers[1]->button->setText(p2);
+    buzzers[2]->button->setText(p3);
+}
+
 void ClueWidget::selectClue(int value, int cat) {
     // Set category and clue text from file
     category->setText(QString::fromStdString(file->getCategory(cat-1)));

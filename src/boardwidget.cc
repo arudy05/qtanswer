@@ -39,6 +39,12 @@ const Tile *BoardWidget::getTile(int ind) {
     return tiles[ind];
 }
 
+void BoardWidget::setPlayerNames(QString p1, QString p2, QString p3) {
+    players[0]->setName(p1);
+    players[1]->setName(p2);
+    players[2]->setName(p3);
+}
+
 void BoardWidget::onTileSelect(int val, int cat) {
     // In the future this will select the clue of corresponding value and category
     // and display it. For now, we just add the value to the first player's score.

@@ -30,6 +30,7 @@ public:
     ~ClueWidget();
 
 public slots:
+    void setPlayerNames(QString, QString, QString);
     void selectClue(int val, int cat);
     void playerBuzzIn(int p);
     void tickDown();

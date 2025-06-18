@@ -25,6 +25,7 @@ public:
 public slots:
     void onTileSelect(int val, int cat);
     void onTileReturn(int player, int score);
+    void setPlayerNames(QString, QString, QString);
 
 };
 

@@ -20,6 +20,11 @@ void Player::setName(std::string str) {
     QName->setText(QString::fromStdString(str));
 }
 
+void Player::setName(QString str) {
+    // Sets player's name
+    QName->setText(str);
+}
+
 QLabel *Player::getScore() {
     // Accessor methor for QScore
     return QScore;

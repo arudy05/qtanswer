@@ -15,6 +15,7 @@ public:
     Player(std::string);        // constructor with player name
     QLabel *getName();          // accessor/mutator functions
     void setName(std::string);  // |
+    void setName(QString);      // |
     QLabel *getScore();         // |
     void setScore(int);         // |
     void addScore(int);         // v

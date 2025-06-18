@@ -7,6 +7,7 @@ qt_add_executable(qtanswer
     tile.cc
     buzzer.cc
     cluefile.cc
+    startwidget.cc
 )
 target_link_libraries(qtanswer PRIVATE Qt6::Widgets)
 
