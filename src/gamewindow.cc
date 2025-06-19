@@ -9,15 +9,15 @@ GameWindow::GameWindow(QWidget *parent) : QWidget{parent}, layout{new QStackedLa
     layout->setCurrentIndex(0);
     setLayout(layout);
 
-    // TODO: This sucks! Make it suck less
-    for (int i = 0; i<30; ++i) {
-        connect(board->getTile(i), SIGNAL (tilePressed(int, int)), this, SLOT (onTileSelect()));
-        connect(board->getTile(i), SIGNAL (tilePressed(int, int)), clueDisplay, SLOT (selectClue(int, int)));
-    }
+    // Connections for when a tile is selected
+    connect(board, SIGNAL (tileSelect(int, int)), this, SLOT (onTileSelect()));
+    connect(board, SIGNAL (tileSelect(int, int)), clueDisplay, SLOT (selectClue(int, int)));
 
-    // many connections
+    // Connections for when we are done with a clue
     connect(clueDisplay, SIGNAL (clueReturn(int, int)), board, SLOT (onTileReturn(int, int)));
     connect(clueDisplay, SIGNAL (clueReturn(int, int)), this, SLOT (onTileReturn()));
+
+    // Connections for setting player names
     connect(start, SIGNAL(gameStart(QString, QString, QString)), board, SLOT (setPlayerNames(QString, QString, QString)));
     connect(start, SIGNAL(gameStart(QString, QString, QString)), clueDisplay, SLOT (setPlayerNames(QString, QString, QString)));
     connect(start, SIGNAL(gameStart(QString, QString, QString)), this, SLOT (onTileReturn()));

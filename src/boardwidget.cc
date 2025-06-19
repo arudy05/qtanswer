@@ -35,11 +35,6 @@ BoardWidget::~BoardWidget() {
     for (int i = 0; i < 3;  ++i) delete players[i];
 }
 
-const Tile *BoardWidget::getTile(int ind) {
-    // return a given tile
-    return tiles[ind];
-}
-
 void BoardWidget::setPlayerNames(QString p1, QString p2, QString p3) {
     // takes 3 player names (from StartWidget via GameWindow) and sets them accordingly.
     // if i am ever to accomodate for a custom amount of players this should be changed
@@ -51,9 +46,11 @@ void BoardWidget::setPlayerNames(QString p1, QString p2, QString p3) {
 
 void BoardWidget::onTileSelect(int val, int cat) {
     // Disables tiles; other functionality is handled by GameWindow
-    // TODO: make BoardWidget emit a signal to be passed to ClueWidget
+    // TODO: make BoardWidget emit a signal to be passed to a slot in ClueWidget; this would make getTile redundant
+    // i have no idea why i did this instead but yeah
     int q = val/200 -1;
     tiles[q*6+cat-1]->disable();
+    emit tileSelect(val, cat);
 }
 
 void BoardWidget::onTileReturn(int player, int score) {

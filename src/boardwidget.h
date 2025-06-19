@@ -20,13 +20,14 @@ class BoardWidget : public QWidget
 public:
     explicit BoardWidget(QWidget *parent = nullptr);
     ~BoardWidget();
-    const Tile *getTile(int ind);
 
 public slots:
     void onTileSelect(int val, int cat);
     void onTileReturn(int player, int score);
     void setPlayerNames(QString, QString, QString);
 
+signals:
+    void tileSelect(int, int);
 };
 
 #endif // BOARDWIDGET_H
