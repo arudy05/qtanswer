@@ -26,6 +26,7 @@ ClueWidget::ClueWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayou
     countdownBarL->setInvertedAppearance(true);
     layout->addWidget(countdownBarL, 2, 0, Qt::AlignRight);
     layout->addWidget(countdownBarR, 2, 2, Qt::AlignLeft);
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 ClueWidget::~ClueWidget() {
@@ -79,5 +80,21 @@ void ClueWidget::tickDown() {
             buzzers[i]->button->setDisabled(false);
             countdownTimer->stop();
         }
+    }
+}
+
+void ClueWidget::keyPressEvent(QKeyEvent *event) {
+    switch (event->key()) {
+    case Qt::Key_A:
+        buzzers[0]->button->animateClick();
+        break;
+    case Qt::Key_B:
+        buzzers[1]->button->animateClick();
+        break;
+    case Qt::Key_L:
+        buzzers[2]->button->animateClick();
+        break;
+    default:
+        break;
     }
 }

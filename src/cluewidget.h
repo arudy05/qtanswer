@@ -7,6 +7,7 @@
 #include <QGridLayout>
 #include <QTimer>
 #include <QProgressBar>
+#include <QKeyEvent>
 #include <vector>
 #include "buzzer.h"
 #include "cluefile.h"
@@ -28,6 +29,7 @@ class ClueWidget : public QWidget {
 public:
     explicit ClueWidget(QWidget *parent = nullptr);
     ~ClueWidget();
+    void keyPressEvent(QKeyEvent *event);
 
 public slots:
     void setPlayerNames(QString, QString, QString);
