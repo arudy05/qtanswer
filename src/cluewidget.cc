@@ -3,7 +3,7 @@
 
 ClueWidget::ClueWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout(this)}, category{new QLabel},
     clue{new QLabel}, val{0}, countdown{3}, countdownTimer{new QTimer(this)}, countdownText{new QLabel},
-    countdownBarL{new QProgressBar}, countdownBarR{new QProgressBar}, file{new ClueFile} {
+    countdownBarL{new QProgressBar}, countdownBarR{new QProgressBar}, file{nullptr} {
 
     // Initialize buzzer objects
     for (int i=0; i<3; ++i) {
@@ -42,11 +42,14 @@ ClueWidget::~ClueWidget() {
     for (int i=0; i<3; ++i) delete buzzers[i];
 }
 
-void ClueWidget::setPlayerNames(QString p1, QString p2, QString p3) {
+void ClueWidget::initGame(QString p1, QString p2, QString p3, std::string path) {
     // sets player names (these should honestly be pulled from corresponding Player objects)
     buzzers[0]->button->setText(p1);
     buzzers[1]->button->setText(p2);
     buzzers[2]->button->setText(p3);
+
+    // sets clue file
+    file = new ClueFile(path);
 }
 
 void ClueWidget::selectClue(int value, int cat) {
@@ -98,3 +101,4 @@ void ClueWidget::keyPressEvent(QKeyEvent *event) {
         break;
     }
 }
+

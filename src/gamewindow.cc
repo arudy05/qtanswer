@@ -18,9 +18,9 @@ GameWindow::GameWindow(QWidget *parent) : QWidget{parent}, layout{new QStackedLa
     connect(clueDisplay, SIGNAL (clueReturn(int, int)), this, SLOT (onTileReturn()));
 
     // Connections for setting player names
-    connect(start, SIGNAL(gameStart(QString, QString, QString)), board, SLOT (setPlayerNames(QString, QString, QString)));
-    connect(start, SIGNAL(gameStart(QString, QString, QString)), clueDisplay, SLOT (setPlayerNames(QString, QString, QString)));
-    connect(start, SIGNAL(gameStart(QString, QString, QString)), this, SLOT (onTileReturn()));
+    connect(start, SIGNAL(gameStart(QString, QString, QString, std::string)), board, SLOT (initGame(QString, QString, QString, std::string)));
+    connect(start, SIGNAL(gameStart(QString, QString, QString, std::string)), clueDisplay, SLOT (initGame(QString, QString, QString, std::string)));
+    connect(start, SIGNAL(gameStart(QString, QString, QString, std::string)), this, SLOT (onTileReturn()));
 }
 
 GameWindow::~GameWindow() {

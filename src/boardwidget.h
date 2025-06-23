@@ -24,7 +24,7 @@ public:
 public slots:
     void onTileSelect(int val, int cat);
     void onTileReturn(int player, int score);
-    void setPlayerNames(QString, QString, QString);
+    void initGame(QString, QString, QString, std::string);
 
 signals:
     void tileSelect(int, int);

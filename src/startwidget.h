@@ -6,7 +6,10 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QFileDialog>
+#include <QMessageBox>
 #include <vector>
+#include "cluefile.h"
 
 class StartWidget : public QWidget {
     Q_OBJECT
@@ -14,17 +17,21 @@ class StartWidget : public QWidget {
     QLabel *title;
     QLabel *playerNameText;
     std::vector<QLineEdit*> playerNames;
+    QLineEdit *filePath;
+    QPushButton *fileSelect;
+    QLabel *fileSelectLabel;
     QPushButton *startButton;
 public:
     explicit StartWidget(QWidget *parent = nullptr);
     ~StartWidget();
 
 signals:
-    void gameStart(QString p1, QString p2, QString p3);
+    void gameStart(QString p1, QString p2, QString p3, std::string path);
+    void fileSelected(std::string filepath);
 
 public slots:
     void gameStartPressed();
-
+    void browseCatFile();
 };
 
 #endif // STARTWIDGET_H

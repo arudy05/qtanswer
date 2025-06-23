@@ -26,13 +26,17 @@ class ClueWidget : public QWidget {
     std::vector<Buzzer*> buzzers;   // player buzzers
     ClueFile *file;                  // clues and stuff
 
+    void widgetInit();
+
 public:
     explicit ClueWidget(QWidget *parent = nullptr);
+    explicit ClueWidget(std::string path, QWidget *parent = nullptr);
     ~ClueWidget();
     void keyPressEvent(QKeyEvent *event);
+    void setClueFile(std::string path);
 
 public slots:
-    void setPlayerNames(QString, QString, QString);
+    void initGame(QString, QString, QString, std::string);
     void selectClue(int val, int cat);
     void playerBuzzIn(int p);
     void tickDown();

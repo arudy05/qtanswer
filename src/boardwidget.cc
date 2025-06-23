@@ -1,14 +1,6 @@
 #include "boardwidget.h"
 #include "cluefile.h"
 BoardWidget::BoardWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout (this)} {
-    // Open categories.json file; the cluefile object will be deleted once this function is done running
-    ClueFile file;
-    // Get category headers from file
-    for (int i = 0; i < 6; ++i) {
-        catHeaders.push_back(new QLabel(QString::fromStdString(file.getCategory(i))));
-        layout->addWidget(catHeaders[i], 0, i, Qt::AlignCenter);
-    }
-
     // 30 tiles - 5 for each of the 6 categories, arranged in the vector such that
     // index [i*6+j] corresponds to the (i+1)th question of the (j+1)th category starting
     // at the top left of the grid.
@@ -35,13 +27,21 @@ BoardWidget::~BoardWidget() {
     for (int i = 0; i < 3;  ++i) delete players[i];
 }
 
-void BoardWidget::setPlayerNames(QString p1, QString p2, QString p3) {
+void BoardWidget::initGame(QString p1, QString p2, QString p3, std::string path) {
     // takes 3 player names (from StartWidget via GameWindow) and sets them accordingly.
     // if i am ever to accomodate for a custom amount of players this should be changed
     // to something using vectors and a for loop but for now this works well enough
     players[0]->setName(p1);
     players[1]->setName(p2);
     players[2]->setName(p3);
+
+    // Open categories.json file; the cluefile object will be deleted once this function is done running
+    ClueFile file(path);
+    // Get category headers from file
+    for (int i = 0; i < 6; ++i) {
+        catHeaders.push_back(new QLabel(QString::fromStdString(file.getCategory(i))));
+        layout->addWidget(catHeaders[i], 0, i, Qt::AlignCenter);
+    }
 }
 
 void BoardWidget::onTileSelect(int val, int cat) {

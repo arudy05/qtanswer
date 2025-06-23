@@ -15,10 +15,3 @@ set_target_properties(qtanswer PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
 )
-
-add_custom_command(
-    TARGET qtanswer POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_SOURCE_DIR}/categories.json
-            ${CMAKE_CURRENT_BINARY_DIR}/categories.json
-)
