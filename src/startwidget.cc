@@ -10,7 +10,8 @@ playerNameText{new QLabel("Enter player names:")}, filePath{new QLineEdit}, file
 
     // Position QLineEdits for player names on the layout
     for (int i = 0; i<3; ++i) {
-        playerNames.push_back(new QLineEdit("Player " + QString::number(i+1)));
+        playerNames.push_back(new QLineEdit);
+        playerNames[i]->setPlaceholderText("Player " + QString::number(i+1));
         layout->addWidget(playerNames[i], i+1, 1, 1, 2);
     }
 
@@ -19,6 +20,7 @@ playerNameText{new QLabel("Enter player names:")}, filePath{new QLineEdit}, file
     layout->addWidget(filePath, 4, 1);
     layout->addWidget(fileSelect, 4, 2);
     filePath->setReadOnly(true);
+    filePath->setPlaceholderText("Path to categories.json file");
     connect(fileSelect, SIGNAL(clicked(bool)), this, SLOT (browseCatFile()));
 
     // When startButton is pressed, we set player names accordingly
