@@ -1,13 +1,7 @@
 #include "cluefile.h"
 
-
-ClueFile::ClueFile() {
-    // Parses a JSON file from which we can pull category names and clues (and in the future, answers).
-    std::ifstream file("categories.json");
-    j = json::parse(file);
-}
-
 ClueFile::ClueFile(std::string path) {
+    // Parses a JSON file from a given path.
     std::ifstream file(path);
     j = json::parse(file);
 }
@@ -23,6 +17,7 @@ std::string ClueFile::getClue(int cat, int val) {
 }
 
 bool ClueFile::isFileValid() {
+    // Checks validity of JSON file; ie it has 6 categories of 5 clues each in the proper format
     std::string name;
     std::string clue;
     try {

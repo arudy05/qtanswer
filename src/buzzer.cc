@@ -1,7 +1,7 @@
 #include "buzzer.h"
 
 
-Buzzer::Buzzer(int p): player{p}, button{new QPushButton("Player " + QString::number(p))} {
+Buzzer::Buzzer(int p): player{p}, button{new QPushButton} {
     connect(button, SIGNAL (clicked(bool)), this, SLOT (onButtonPress()));
     //button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }

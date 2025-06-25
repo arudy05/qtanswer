@@ -46,8 +46,6 @@ void BoardWidget::initGame(QString p1, QString p2, QString p3, std::string path)
 
 void BoardWidget::onTileSelect(int val, int cat) {
     // Disables tiles; other functionality is handled by GameWindow
-    // TODO: make BoardWidget emit a signal to be passed to a slot in ClueWidget; this would make getTile redundant
-    // i have no idea why i did this instead but yeah
     int q = val/200 -1;
     tiles[q*6+cat-1]->disable();
     emit tileSelect(val, cat);
