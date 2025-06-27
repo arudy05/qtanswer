@@ -3,7 +3,7 @@
 
 ClueWidget::ClueWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout(this)}, category{new QLabel},
     clue{new QLabel}, val{0}, countdown{3}, countdownTimer{new QTimer(this)}, countdownText{new QLabel},
-    countdownBarL{new QProgressBar}, countdownBarR{new QProgressBar}, file{nullptr} {
+    countdownBarL{new QProgressBar}, countdownBarR{new QProgressBar} {
 
     // Initialize buzzer objects
     for (int i=0; i<3; ++i) {
@@ -38,24 +38,20 @@ ClueWidget::~ClueWidget() {
     delete countdownText;
     delete countdownBarL;
     delete countdownBarR;
-    delete file;
     for (int i=0; i<3; ++i) delete buzzers[i];
 }
 
-void ClueWidget::initGame(QString p1, QString p2, QString p3, std::string path) {
+void ClueWidget::initGame(QString p1, QString p2, QString p3) {
     // sets player names (these should honestly be pulled from corresponding Player objects)
     buzzers[0]->button->setText(p1);
     buzzers[1]->button->setText(p2);
     buzzers[2]->button->setText(p3);
-
-    // sets clue file
-    file = new ClueFile(path);
 }
 
-void ClueWidget::selectClue(int value, int cat) {
+void ClueWidget::selectClue(int value, std::string catText, std::string clueText) {
     // Set category and clue text from file
-    category->setText(QString::fromStdString(file->getCategory(cat-1)));
-    clue->setText(QString::fromStdString(file->getClue(cat-1, value/200-1)));
+    category->setText(QString::fromStdString(catText));
+    clue->setText(QString::fromStdString(clueText));
     // Set point value of this clue, to be awarded to successful players.
     val = value;
     // Get countdown stuff ready - this includes disabling buzzer buttons!

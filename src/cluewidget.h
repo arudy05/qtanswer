@@ -10,7 +10,6 @@
 #include <QKeyEvent>
 #include <vector>
 #include "buzzer.h"
-#include "cluefile.h"
 
 class ClueWidget : public QWidget {
     Q_OBJECT
@@ -24,20 +23,16 @@ class ClueWidget : public QWidget {
     QProgressBar *countdownBarL;    // |
     QProgressBar *countdownBarR;    // v
     std::vector<Buzzer*> buzzers;   // player buzzers
-    ClueFile *file;                  // clues and stuff
-
-    void widgetInit();
 
 public:
     explicit ClueWidget(QWidget *parent = nullptr);
-    explicit ClueWidget(std::string path, QWidget *parent = nullptr);
     ~ClueWidget();
     void keyPressEvent(QKeyEvent *event);
     void setClueFile(std::string path);
 
 public slots:
-    void initGame(QString, QString, QString, std::string);
-    void selectClue(int val, int cat);
+    void initGame(QString, QString, QString);
+    void selectClue(int val, std::string, std::string);
     void playerBuzzIn(int p);
     void tickDown();
 

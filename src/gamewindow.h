@@ -6,6 +6,7 @@
 #include "startwidget.h"
 #include "boardwidget.h"
 #include "cluewidget.h"
+#include "cluefile.h"
 
 class GameWindow : public QWidget {
     Q_OBJECT
@@ -13,11 +14,13 @@ class GameWindow : public QWidget {
     StartWidget *start;
     BoardWidget *board;
     ClueWidget *clueDisplay;
+    ClueFile *file;
 public:
     explicit GameWindow(QWidget *parent = nullptr);
     ~GameWindow();
 public slots:
-    void onTileSelect();
+    void onGameStart(QString, QString, QString, std::string);
+    void onTileSelect(int, int);
     void onTileReturn();
 
 signals:

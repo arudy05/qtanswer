@@ -20,11 +20,12 @@ class BoardWidget : public QWidget
 public:
     explicit BoardWidget(QWidget *parent = nullptr);
     ~BoardWidget();
+    void setCategoryHeader(int cat, std::string text);
 
 public slots:
     void onTileSelect(int val, int cat);
     void onTileReturn(int player, int score);
-    void initGame(QString, QString, QString, std::string);
+    void initGame(QString, QString, QString);
 
 signals:
     void tileSelect(int, int);
