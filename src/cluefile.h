@@ -14,6 +14,7 @@ public:
     ClueFile(std::string path);
     std::string getCategory(int cat);
     std::string getClue(int cat, int val);
+    std::vector<std::string> getAnswers(int cat, int val);
     bool isFileValid();
 };
 

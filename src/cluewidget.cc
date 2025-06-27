@@ -3,14 +3,22 @@
 
 ClueWidget::ClueWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout(this)}, category{new QLabel},
     clue{new QLabel}, val{0}, countdown{3}, countdownTimer{new QTimer(this)}, countdownText{new QLabel},
-    countdownBarL{new QProgressBar}, countdownBarR{new QProgressBar} {
+    countdownBarL{new QProgressBar}, countdownBarR{new QProgressBar}, answerBoxText{new QLabel}, answerBox{new QLineEdit} {
 
     // Initialize buzzer objects
     for (int i=0; i<3; ++i) {
         buzzers.push_back(new Buzzer(i));
-        layout->addWidget(buzzers[i]->button, 3, i);
+        layout->addWidget(buzzers[i]->button, 4, i);
         connect(buzzers[i], SIGNAL (buzzIn(int)), this, SLOT (playerBuzzIn(int)));
     }
+
+    // Initialize answer box stuff
+    layout->addWidget(answerBoxText, 3, 0);
+    layout->addWidget(answerBox, 3, 1, 1, 2);
+    answerBoxText->setVisible(false);
+    answerBox->setVisible(false);
+    answerBox->setPlaceholderText("Type answer, then press ENTER/RETURN key");
+    connect(answerBox, SIGNAL (returnPressed()), this, SLOT (playerAnswer()));
 
     // Initialize category/clue labels
     layout->addWidget(category, 0, 0, 1, 3, Qt::AlignCenter);
@@ -38,6 +46,8 @@ ClueWidget::~ClueWidget() {
     delete countdownText;
     delete countdownBarL;
     delete countdownBarR;
+    delete answerBoxText;
+    delete answerBox;
     for (int i=0; i<3; ++i) delete buzzers[i];
 }
 
@@ -48,24 +58,86 @@ void ClueWidget::initGame(QString p1, QString p2, QString p3) {
     buzzers[2]->button->setText(p3);
 }
 
-void ClueWidget::selectClue(int value, std::string catText, std::string clueText) {
-    // Set category and clue text from file
+void ClueWidget::selectClue(int value, std::string catText, std::string clueText, std::vector<std::string> clueAns) {
+    // Set category, clue text and possible answers from file
     category->setText(QString::fromStdString(catText));
     clue->setText(QString::fromStdString(clueText));
+    answers = clueAns;
     // Set point value of this clue, to be awarded to successful players.
     val = value;
-    // Get countdown stuff ready - this includes disabling buzzer buttons!
+    // Reset playerWrong flags
+    playerWrong.clear();
+    for (int i = 0; i<3; ++i) playerWrong.push_back(false);
+    // Disable buzzer buttons
+    for (int i=0; i<3; ++i) buzzers[i]->button->setDisabled(true);
+    // Start countdown stuff
+    startCountdown();
+}
+
+void ClueWidget::playerBuzzIn(int p) {
+    currentPlayer = p;
+    // Set up and show answer box stuff
+    answerBoxText->setText(buzzers[p]->button->text() + ":");
+    answerBoxText->setVisible(true);
+    answerBox->setVisible(true);
+    answerBox->grabKeyboard();
+    // Hide and disable buzzers
+    for (int i=0; i<3; ++i) buzzers[i]->button->hide();
+    for (int i=0; i<3; ++i) buzzers[i]->button->setDisabled(true);
+    // Hide countdown stuff
+    countdownText->hide();
+    countdownBarL->hide();
+    countdownBarR->hide();
+}
+
+void ClueWidget::playerAnswer() {
+    // Show buzzers and countdown stuff
+    for (int i=0; i<3; ++i) buzzers[i]->button->show();
+    countdownText->show();
+    countdownBarL->show();
+    countdownBarR->show();
+
+    // Hide answer box stuff
+    answerBoxText->hide();
+    answerBox->hide();
+    answerBox->releaseKeyboard();
+
+    // Grab answer from answer box and clear it
+    std::string response = answerBox->text().toStdString();
+    answerBox->clear();
+
+    // Check if answer is correct:
+    int answerSize = answers.size();
+    for (int i = 0; i < answerSize; ++i) {
+        if (response == answers[i]) {
+            // Answer is correct, return to board
+            emit clueReturn(currentPlayer, val);
+            return;
+        }
+    }
+    //Answer is incorrect, deduct points and disable player's buzzer for the rest of this clue
+    emit incorrectAns(currentPlayer, -val);
+    playerWrong[currentPlayer] = true;
+
+    // Check to make sure at least one player buzzer is enabled before restarting countdown
+    for (int i = 0; i<3; ++i) {
+        if (!playerWrong[i]) {
+            startCountdown();
+            return;
+        }
+    }
+    // At this point all player buzzers should be disabled, in which case we return to the board
+    emit(clueReturn(0,0));
+}
+
+void ClueWidget::startCountdown() {
+     // Get countdown stuff ready
     countdown = 3;
     countdownTimer->start(1000);
     countdownText->setText(QString::number(countdown));
     countdownBarL->setValue(3);
     countdownBarR->setValue(3);
-    for (int i=0; i<3; ++i) buzzers[i]->button->setDisabled(true);
-}
 
-void ClueWidget::playerBuzzIn(int p) {
-    // For now we just assume the player has the correct answer
-    emit clueReturn(p, val);
 }
 
 void ClueWidget::tickDown() {
@@ -75,10 +147,8 @@ void ClueWidget::tickDown() {
     countdownBarR->setValue(countdown);
     // When we hit 0, enable player buzzers and stop the timer
     if (countdown <= 0) {
-        for (int i=0; i<3; ++i) {
-            buzzers[i]->button->setDisabled(false);
-            countdownTimer->stop();
-        }
+        for (int i=0; i<3; ++i) if (!playerWrong[i]) buzzers[i]->button->setDisabled(false);
+        countdownTimer->stop();
     }
 }
 
@@ -93,6 +163,8 @@ void ClueWidget::keyPressEvent(QKeyEvent *event) {
     case Qt::Key_L:
         buzzers[2]->button->animateClick();
         break;
+    case Qt::Key_Escape:
+        emit(clueReturn(0,0));
     default:
         break;
     }

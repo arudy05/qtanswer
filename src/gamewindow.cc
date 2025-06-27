@@ -47,6 +47,7 @@ void GameWindow::onGameStart(QString p1, QString p2, QString p3, std::string pat
     // Connections for when we are done with a clue
     connect(clueDisplay, SIGNAL (clueReturn(int, int)), board, SLOT (onTileReturn(int, int)));
     connect(clueDisplay, SIGNAL (clueReturn(int, int)), this, SLOT (onTileReturn()));
+    connect(clueDisplay, SIGNAL (incorrectAns(int, int)), board, SLOT (onTileReturn(int, int)));
 
     // Switch view to the BoardWidget
     layout->setCurrentIndex(1);
@@ -56,7 +57,8 @@ void GameWindow::onTileSelect(int val, int cat) {
     // When a tile is selected, switch to the ClueWidget
     std::string clueCat = file->getCategory(cat);
     std::string clueText = file->getClue(cat, val/scoreBase-1);
-    clueDisplay->selectClue(val, clueCat, clueText);
+    std::vector<std::string> clueAns = file->getAnswers(cat, val/scoreBase-1);
+    clueDisplay->selectClue(val, clueCat, clueText, clueAns);
     layout->setCurrentIndex(2);
 }
 

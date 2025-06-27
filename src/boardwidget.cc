@@ -24,7 +24,6 @@ scoreBase{scoreBase} {
         layout->addWidget(players[i]->getName(),  6, i*2, 1, 2, Qt::AlignCenter);
         layout->addWidget(players[i]->getScore(), 7, i*2, 1, 2, Qt::AlignCenter);
     }
-
 }
 
 BoardWidget::~BoardWidget() {
@@ -51,7 +50,7 @@ void BoardWidget::onTileSelect(int val, int cat) {
     // Disables tiles; other functionality is handled by GameWindow
     int q = val/scoreBase -1;
     tiles[q*6+cat-1]->disable();
-    emit tileSelect(val, cat);
+    emit tileSelect(val, cat-1);
 }
 
 void BoardWidget::onTileReturn(int player, int score) {

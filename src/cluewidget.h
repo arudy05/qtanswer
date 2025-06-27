@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QProgressBar>
 #include <QKeyEvent>
+#include <QLineEdit>
 #include <vector>
 #include "buzzer.h"
 
@@ -23,21 +24,29 @@ class ClueWidget : public QWidget {
     QProgressBar *countdownBarL;    // |
     QProgressBar *countdownBarR;    // v
     std::vector<Buzzer*> buzzers;   // player buzzers
+    int currentPlayer;              // last player to buzz in
+    std::vector<std::string> answers; // all possible answers for a given clue
+    std::vector<bool> playerWrong;  // flags for if players are wrong
+    QLabel *answerBoxText;          // text containing player name
+    QLineEdit *answerBox;           // space to enter player answer
 
 public:
     explicit ClueWidget(QWidget *parent = nullptr);
     ~ClueWidget();
     void keyPressEvent(QKeyEvent *event);
     void setClueFile(std::string path);
+    void startCountdown();
 
 public slots:
     void initGame(QString, QString, QString);
-    void selectClue(int val, std::string, std::string);
+    void selectClue(int val, std::string, std::string, std::vector<std::string>);
     void playerBuzzIn(int p);
+    void playerAnswer();
     void tickDown();
 
 signals:
     void clueReturn (int player, int val);
+    void incorrectAns (int player, int val);
 };
 
 #endif // CLUEWIDGET_H
