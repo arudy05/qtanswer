@@ -10,8 +10,8 @@ GameWindow::GameWindow(QWidget *parent) : QWidget{parent}, layout{new QStackedLa
     setLayout(layout);
 
     // Connections for setting player names
-    connect(start, SIGNAL(gameStart(QString, QString, QString, std::string)),
-            this, SLOT (onGameStart(QString, QString, QString, std::string)));
+    connect(start, SIGNAL(gameStart(QString, QString, QString, std::string, int)),
+            this, SLOT (onGameStart(QString, QString, QString, std::string, int)));
 }
 
 GameWindow::~GameWindow() {
@@ -21,12 +21,15 @@ GameWindow::~GameWindow() {
     delete clueDisplay;
 }
 
-void GameWindow::onGameStart(QString p1, QString p2, QString p3, std::string path) {
+void GameWindow::onGameStart(QString p1, QString p2, QString p3, std::string path, int scoreBase) {
+    //Set score base
+    this->scoreBase = scoreBase;
+
     // Create ClueFile based on given path
     file = new ClueFile(path);
 
     // Initialize BoardWidget
-    board = new BoardWidget();
+    board = new BoardWidget(scoreBase);
     for(int i = 0; i <6; ++i) board->setCategoryHeader(i, file->getCategory(i));
     board->initGame(p1, p2, p3);
 
@@ -52,7 +55,7 @@ void GameWindow::onGameStart(QString p1, QString p2, QString p3, std::string pat
 void GameWindow::onTileSelect(int val, int cat) {
     // When a tile is selected, switch to the ClueWidget
     std::string clueCat = file->getCategory(cat);
-    std::string clueText = file->getClue(cat, val/200-1);
+    std::string clueText = file->getClue(cat, val/scoreBase-1);
     clueDisplay->selectClue(val, clueCat, clueText);
     layout->setCurrentIndex(2);
 }

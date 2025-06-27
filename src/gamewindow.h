@@ -15,11 +15,12 @@ class GameWindow : public QWidget {
     BoardWidget *board;
     ClueWidget *clueDisplay;
     ClueFile *file;
+    int scoreBase;
 public:
     explicit GameWindow(QWidget *parent = nullptr);
     ~GameWindow();
 public slots:
-    void onGameStart(QString, QString, QString, std::string);
+    void onGameStart(QString, QString, QString, std::string, int);
     void onTileSelect(int, int);
     void onTileReturn();
 

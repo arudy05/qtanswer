@@ -16,9 +16,10 @@ class BoardWidget : public QWidget
     std::vector<QLabel*> catHeaders;    // Category headers
     std::vector<Tile*> tiles;           // Clue tiles
     std::vector<Player*> players;       // Players and scores
+    int scoreBase;
 
 public:
-    explicit BoardWidget(QWidget *parent = nullptr);
+    explicit BoardWidget(int scoreBase, QWidget *parent = nullptr);
     ~BoardWidget();
     void setCategoryHeader(int cat, std::string text);
 

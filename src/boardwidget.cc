@@ -1,6 +1,7 @@
 #include "boardwidget.h"
 
-BoardWidget::BoardWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout (this)} {
+BoardWidget::BoardWidget(int scoreBase, QWidget *parent) : QWidget{parent}, layout{new QGridLayout (this)},
+scoreBase{scoreBase} {
     // Set up empty category headers
     for (int i = 0; i < 6; ++i) {
         catHeaders.push_back(new QLabel);
@@ -11,7 +12,7 @@ BoardWidget::BoardWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLay
     // index [i*6+j] corresponds to the (i+1)th question of the (j+1)th category starting
     // at the top left of the grid.
     for (int i = 0; i<30; ++i) {
-        tiles.push_back(new Tile(((i/6)+1)*200, i%6+1));
+        tiles.push_back(new Tile(((i/6)+1)*scoreBase, i%6+1));
         layout->addWidget(tiles[i]->button, i/6+1, i%6);
         connect(tiles[i], SIGNAL (tilePressed(int, int)), this, SLOT (onTileSelect(int, int)));
     }
@@ -48,7 +49,7 @@ void BoardWidget::initGame(QString p1, QString p2, QString p3) {
 
 void BoardWidget::onTileSelect(int val, int cat) {
     // Disables tiles; other functionality is handled by GameWindow
-    int q = val/200 -1;
+    int q = val/scoreBase -1;
     tiles[q*6+cat-1]->disable();
     emit tileSelect(val, cat);
 }

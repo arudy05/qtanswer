@@ -3,7 +3,8 @@
 
 StartWidget::StartWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout(this)}, title{new QLabel("QtAnswer")},
 playerNameText{new QLabel("Enter player names:")}, filePath{new QLineEdit}, fileSelect{new QPushButton("Browse...")},
-  fileSelectLabel{new QLabel("Categories file:")}, startButton{new QPushButton("Start game")} {
+  fileSelectLabel{new QLabel("Categories file:")}, scoreBaseLabel{new QLabel("Score base:")}, scoreBaseSelect{new QSpinBox},
+  startButton{new QPushButton("Start game")} {
     // Position QLabels on the layout
     layout->addWidget(title, 0, 0, 1, 3, Qt::AlignCenter);
     layout->addWidget(playerNameText, 1, 0);
@@ -23,8 +24,15 @@ playerNameText{new QLabel("Enter player names:")}, filePath{new QLineEdit}, file
     filePath->setPlaceholderText("Path to categories.json file");
     connect(fileSelect, SIGNAL(clicked(bool)), this, SLOT (browseCatFile()));
 
+    // Position and set up stuff for selecting score base
+    layout->addWidget(scoreBaseLabel, 5, 0);
+    layout->addWidget(scoreBaseSelect, 5, 1, 1, 2);
+    scoreBaseSelect->setMaximum(1000);
+    scoreBaseSelect->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
+    scoreBaseSelect->setValue(200);
+
     // When startButton is pressed, we set player names accordingly
-    layout->addWidget(startButton, 5, 1, 1, 2);
+    layout->addWidget(startButton, 6, 1, 1, 2);
     connect(startButton, SIGNAL (clicked(bool)), this, SLOT (gameStartPressed()));
 }
 
@@ -36,6 +44,8 @@ StartWidget::~StartWidget() {
     delete filePath;
     delete fileSelect;
     delete fileSelectLabel;
+    delete scoreBaseSelect;
+    delete scoreBaseLabel;
     delete startButton;
     for (int i = 0; i<3; ++i) delete playerNames[i];
 }
@@ -60,7 +70,8 @@ void StartWidget::gameStartPressed() {
         return;
     }
 
-    emit gameStart(playerNames[0]->displayText(), playerNames[1]->displayText(), playerNames[2]->displayText(), path.toStdString());
+    emit gameStart(playerNames[0]->displayText(), playerNames[1]->displayText(), playerNames[2]->displayText(),
+                   path.toStdString(), scoreBaseSelect->value());
 }
 
 void StartWidget::browseCatFile() {

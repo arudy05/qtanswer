@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QSpinBox>
 #include <QPushButton>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -20,13 +21,15 @@ class StartWidget : public QWidget {
     QLineEdit *filePath;
     QPushButton *fileSelect;
     QLabel *fileSelectLabel;
+    QLabel *scoreBaseLabel;
+    QSpinBox *scoreBaseSelect;
     QPushButton *startButton;
 public:
     explicit StartWidget(QWidget *parent = nullptr);
     ~StartWidget();
 
 signals:
-    void gameStart(QString p1, QString p2, QString p3, std::string path);
+    void gameStart(QString p1, QString p2, QString p3, std::string path, int scoreBase);
     void fileSelected(std::string filepath);
 
 public slots:
