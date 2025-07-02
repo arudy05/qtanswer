@@ -56,4 +56,20 @@ void BoardWidget::onTileSelect(int val, int cat) {
 void BoardWidget::onTileReturn(int player, int score) {
     // Adds given score to given player
     players[player]->addScore(score);
+
+    static int tilesSelected = 0;
+    if (++tilesSelected == 30) {
+        tilesSelected = 0;
+        emit gameOver(players);
+    }
+
+}
+
+void BoardWidget::keyPressEvent(QKeyEvent *event) {
+    switch (event->key()) {
+    case Qt::Key_Escape:
+        emit(gameOver(players));
+    default:
+        break;
+    }
 }

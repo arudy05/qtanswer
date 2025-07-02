@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QGridLayout>
 #include <QLabel>
+#include <QKeyEvent>
 #include <vector>
 #include "tile.h"
 #include "player.h"
@@ -21,6 +22,7 @@ class BoardWidget : public QWidget
 public:
     explicit BoardWidget(int scoreBase, QWidget *parent = nullptr);
     ~BoardWidget();
+    void keyPressEvent(QKeyEvent *event);
     void setCategoryHeader(int cat, std::string text);
 
 public slots:
@@ -30,6 +32,7 @@ public slots:
 
 signals:
     void tileSelect(int, int);
+    void gameOver(std::vector<Player*>);
 };
 
 #endif // BOARDWIDGET_H

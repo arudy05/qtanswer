@@ -30,6 +30,10 @@ QLabel *Player::getScore() {
     return QScore;
 }
 
+int Player::getIntScore() {
+    return score;
+}
+
 // Note that score is stored as an integer. This integer is operated on
 // to avoid pulling the value from QScore's text (yuck).
 

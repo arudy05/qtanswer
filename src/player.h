@@ -17,6 +17,7 @@ public:
     void setName(std::string);  // |
     void setName(QString);      // |
     QLabel *getScore();         // |
+    int getIntScore();          // |
     void setScore(int);         // |
     void addScore(int);         // v
 };

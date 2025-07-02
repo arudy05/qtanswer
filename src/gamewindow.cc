@@ -2,11 +2,11 @@
 
 
 GameWindow::GameWindow(QWidget *parent) : QWidget{parent}, layout{new QStackedLayout},
-    start{new StartWidget}, board{nullptr}, clueDisplay{nullptr}, file{nullptr} {
+    start{new StartWidget}, board{nullptr}, clueDisplay{nullptr}, results{nullptr}, file{nullptr} {
 
     // Add start widget; others will be added once the setup process is complete
     layout->addWidget(start);
-    layout->setCurrentIndex(0);
+    layout->setCurrentWidget(start);
     setLayout(layout);
 
     // Connections for setting player names
@@ -19,6 +19,7 @@ GameWindow::~GameWindow() {
     delete layout;
     delete board;
     delete clueDisplay;
+    delete results;
 }
 
 void GameWindow::onGameStart(QString p1, QString p2, QString p3, std::string path, int scoreBase) {
@@ -49,8 +50,11 @@ void GameWindow::onGameStart(QString p1, QString p2, QString p3, std::string pat
     connect(clueDisplay, SIGNAL (clueReturn(int, int)), this, SLOT (onTileReturn()));
     connect(clueDisplay, SIGNAL (incorrectAns(int, int)), board, SLOT (onTileReturn(int, int)));
 
+    // Connection for the end of a game (premature or not)
+    connect(board, SIGNAL (gameOver(std::vector<Player*>)), this, SLOT (gameEndScreen(std::vector<Player*>)));
+
     // Switch view to the BoardWidget
-    layout->setCurrentIndex(1);
+    layout->setCurrentWidget(board);
 }
 
 void GameWindow::onTileSelect(int val, int cat) {
@@ -59,10 +63,26 @@ void GameWindow::onTileSelect(int val, int cat) {
     std::string clueText = file->getClue(cat, val/scoreBase-1);
     std::vector<std::string> clueAns = file->getAnswers(cat, val/scoreBase-1);
     clueDisplay->selectClue(val, clueCat, clueText, clueAns);
-    layout->setCurrentIndex(2);
+    layout->setCurrentWidget(clueDisplay);
 }
 
 void GameWindow::onTileReturn() {
     // Switch back to the BoardWidget after going through a clue
-    layout->setCurrentIndex(1);
+    layout->setCurrentWidget(board);
+}
+
+void GameWindow::gameEndScreen(std::vector<Player *> players) {
+    results = new ResultsWidget(players);
+    layout->addWidget(results);
+    layout->setCurrentWidget(results);
+    connect(results, &ResultsWidget::quitGame, this, &GameWindow::close);
+    connect(results, &ResultsWidget::resetGame, this, &GameWindow::resetGame);
+}
+
+
+void GameWindow::resetGame() {
+    layout->setCurrentWidget(start);
+    delete board;
+    delete clueDisplay;
+    delete results;
 }

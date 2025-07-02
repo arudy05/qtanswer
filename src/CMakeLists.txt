@@ -8,6 +8,7 @@ qt_add_executable(qtanswer
     buzzer.cc
     cluefile.cc
     startwidget.cc
+    resultswidget.h resultswidget.cc
 )
 target_link_libraries(qtanswer PRIVATE Qt6::Widgets)
 
