@@ -1,51 +1,47 @@
 #include "startwidget.h"
 
 
-StartWidget::StartWidget(QWidget *parent) : QWidget{parent}, layout{new QGridLayout(this)}, title{new QLabel("QtAnswer")},
-playerNameText{new QLabel("Enter player names:")}, filePath{new QLineEdit}, fileSelect{new QPushButton("Browse...")},
-  fileSelectLabel{new QLabel("Categories file:")}, scoreBaseLabel{new QLabel("Score base:")}, scoreBaseSelect{new QSpinBox},
-  startButton{new QPushButton("Start game")} {
-    // Position QLabels on the layout
-    layout->addWidget(title, 0, 0, 1, 3, Qt::AlignCenter);
-    layout->addWidget(playerNameText, 1, 0);
+StartWidget::StartWidget(QWidget *parent) : QWidget{parent}, layout{new QFormLayout(this)},
+    title{new QLabel("## Welcome to QtAnswer!")}, filePath{new QLineEdit},
+    fileSelect{filePath->addAction(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpen), QLineEdit::TrailingPosition)},
+    scoreBaseSelect{new QSpinBox}, startButton{new QPushButton("Start game")} {
 
-    // Position QLineEdits for player names on the layout
+    // Configure and add title
+    title->setTextFormat(Qt::MarkdownText);
+    title->setAlignment(Qt::AlignCenter);
+    layout->addRow(title);
+
+    // Initialize QLineEdits for player names and add them to layout
     for (int i = 0; i<3; ++i) {
         playerNames.push_back(new QLineEdit);
-        playerNames[i]->setPlaceholderText("Player " + QString::number(i+1));
-        layout->addWidget(playerNames[i], i+1, 1, 1, 2);
+        playerNames[i]->setPlaceholderText("default");
+        layout->addRow("Player " + QString::number(i+1) + " name:", playerNames[i]);
     }
 
     // Position stuff for selecting clue/category JSON files
-    layout->addWidget(fileSelectLabel, 4, 0);
-    layout->addWidget(filePath, 4, 1);
-    layout->addWidget(fileSelect, 4, 2);
-    filePath->setReadOnly(true);
+    layout->addRow("Categories file:", filePath);
     filePath->setPlaceholderText("Path to categories.json file");
-    connect(fileSelect, SIGNAL(clicked(bool)), this, SLOT (browseCatFile()));
+    connect(fileSelect, SIGNAL(triggered(bool)), this, SLOT (browseCatFile()));
 
     // Position and set up stuff for selecting score base
-    layout->addWidget(scoreBaseLabel, 5, 0);
-    layout->addWidget(scoreBaseSelect, 5, 1, 1, 2);
+    layout->addRow("Score base:", scoreBaseSelect);
     scoreBaseSelect->setMaximum(1000);
     scoreBaseSelect->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
     scoreBaseSelect->setValue(200);
 
     // When startButton is pressed, we set player names accordingly
-    layout->addWidget(startButton, 6, 1, 1, 2);
+    layout->addRow(startButton);
     connect(startButton, SIGNAL (clicked(bool)), this, SLOT (gameStartPressed()));
+
 }
 
 StartWidget::~StartWidget() {
     // memory cleanup time!
     delete layout;
     delete title;
-    delete playerNameText;
     delete filePath;
     delete fileSelect;
-    delete fileSelectLabel;
     delete scoreBaseSelect;
-    delete scoreBaseLabel;
     delete startButton;
     for (int i = 0; i<3; ++i) delete playerNames[i];
 }
@@ -77,6 +73,6 @@ void StartWidget::gameStartPressed() {
 void StartWidget::browseCatFile() {
     // Get filepath for categories.json file
     QString filename;
-    filename = QFileDialog::getOpenFileName(this, "Select categories file", "/home", "JSON files (*.json)");
+    filename = QFileDialog::getOpenFileName(this, "Select categories file", QDir::homePath(), "JSON files (*.json)");
     filePath->setText(filename);
 }

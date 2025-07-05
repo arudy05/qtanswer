@@ -2,7 +2,7 @@
 #define STARTWIDGET_H
 
 #include <QWidget>
-#include <QGridLayout>
+#include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QSpinBox>
@@ -14,14 +14,11 @@
 
 class StartWidget : public QWidget {
     Q_OBJECT
-    QGridLayout *layout;
+    QFormLayout *layout;
     QLabel *title;
-    QLabel *playerNameText;
     std::vector<QLineEdit*> playerNames;
     QLineEdit *filePath;
-    QPushButton *fileSelect;
-    QLabel *fileSelectLabel;
-    QLabel *scoreBaseLabel;
+    QAction *fileSelect;
     QSpinBox *scoreBaseSelect;
     QPushButton *startButton;
 public:
