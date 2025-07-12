@@ -29,6 +29,8 @@ scoreBase{scoreBase} {
 BoardWidget::~BoardWidget() {
     // All tile and player objects were allocated by us, therefore we have to make
     // sure that all memory is freed properly.
+    delete layout;
+    for (int i = 0; i < 6;  ++i) delete catHeaders[i];
     for (int i = 0; i < 30; ++i) delete tiles[i];
     for (int i = 0; i < 3;  ++i) delete players[i];
 }

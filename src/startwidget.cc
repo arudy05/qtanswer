@@ -40,7 +40,6 @@ StartWidget::~StartWidget() {
     delete layout;
     delete title;
     delete filePath;
-    delete fileSelect;
     delete scoreBaseSelect;
     delete startButton;
     for (int i = 0; i<3; ++i) delete playerNames[i];

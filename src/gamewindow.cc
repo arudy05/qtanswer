@@ -20,6 +20,7 @@ GameWindow::~GameWindow() {
     delete board;
     delete clueDisplay;
     delete results;
+    delete file;
 }
 
 void GameWindow::onGameStart(QString p1, QString p2, QString p3, std::string path, int scoreBase) {
