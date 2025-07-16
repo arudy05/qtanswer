@@ -56,6 +56,8 @@ void GameWindow::onGameStart(QString p1, QString p2, QString p3, std::string pat
 
     // Switch view to the BoardWidget
     layout->setCurrentWidget(board);
+
+    emit displayMenuBar(false);
 }
 
 void GameWindow::onTileSelect(int val, int cat) {
@@ -76,8 +78,9 @@ void GameWindow::gameEndScreen(std::vector<Player *> players) {
     results = new ResultsWidget(players);
     layout->addWidget(results);
     layout->setCurrentWidget(results);
-    connect(results, &ResultsWidget::quitGame, this, &GameWindow::close);
+    connect(results, &ResultsWidget::quitGame, this, &GameWindow::closeGame);
     connect(results, &ResultsWidget::resetGame, this, &GameWindow::resetGame);
+    emit displayMenuBar(true);
 }
 
 
@@ -86,4 +89,8 @@ void GameWindow::resetGame() {
     delete board;
     delete clueDisplay;
     delete results;
+}
+
+void GameWindow::closeGame() {
+    emit quit();
 }

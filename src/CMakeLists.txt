@@ -1,3 +1,5 @@
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+
 qt_add_executable(qtanswer
     main.cc
     gamewindow.cc
@@ -9,7 +11,9 @@ qt_add_executable(qtanswer
     cluefile.cc
     startwidget.cc
     resultswidget.h resultswidget.cc
+    mainwindow.h mainwindow.cc
 )
+target_link_libraries(qtanswer PRIVATE Qt6::Widgets)
 target_link_libraries(qtanswer PRIVATE Qt6::Widgets)
 
 set_target_properties(qtanswer PROPERTIES

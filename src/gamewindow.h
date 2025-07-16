@@ -27,9 +27,10 @@ public slots:
     void onTileReturn();
     void gameEndScreen(std::vector<Player*>);
     void resetGame();
-
+    void closeGame();
 signals:
-
+    void quit();
+    void displayMenuBar(bool);
 };
 
 #endif // GAMEWINDOW_H

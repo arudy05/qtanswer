@@ -1,12 +1,12 @@
 #include <QApplication>
 
-#include "gamewindow.h"
+#include "mainwindow.h"
 #include "version.h"
 
 int main(int argc, char **argv) {
     QApplication app (argc, argv);
 
-    GameWindow window;
+    MainWindow window;
     window.setWindowTitle(WINDOW_HEADER);
 
     window.show();

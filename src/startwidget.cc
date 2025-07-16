@@ -51,6 +51,7 @@ void StartWidget::gameStartPressed() {
 
     QString path = filePath->text();
     QMessageBox error;
+    error.setIcon(QMessageBox::Information);
 
     if (path == "") {
         error.setText("No file selected!");
