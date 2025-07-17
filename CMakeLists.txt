@@ -35,3 +35,5 @@ add_custom_target(
         ${CMAKE_SOURCE_DIR}
 )
 ########
+
+install(TARGETS qtanswer DESTINATION bin)
