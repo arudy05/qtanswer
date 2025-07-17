@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QGridLayout>
-#include "player.h"
+#include <player.h>
 
 class ResultsWidget : public QWidget {
     Q_OBJECT

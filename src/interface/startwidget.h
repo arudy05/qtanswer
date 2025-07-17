@@ -10,7 +10,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <vector>
-#include "cluefile.h"
+#include <cluefile.h>
 
 class StartWidget : public QWidget {
     Q_OBJECT

@@ -10,7 +10,7 @@
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <vector>
-#include "buzzer.h"
+#include <buzzer.h>
 
 class ClueWidget : public QWidget {
     Q_OBJECT

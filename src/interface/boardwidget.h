@@ -6,8 +6,8 @@
 #include <QLabel>
 #include <QKeyEvent>
 #include <vector>
-#include "tile.h"
-#include "player.h"
+#include <tile.h>
+#include <player.h>
 
 // The main game board, plus player scores.
 class BoardWidget : public QWidget

@@ -9,10 +9,9 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(nlohmann_json 3.12.0 REQUIRED)
 qt_standard_project_setup()
 
-add_library(json)
-target_link_libraries(json PRIVATE nlohmann_json::nlohmann_json)
-
 add_subdirectory(src)
+add_subdirectory(src/wrappers)
+add_subdirectory(src/interface)
 
 # THIS SECTION is adapted from https://gist.github.com/Tordan/c4d4d14aac0e85ebf7122ed2189ea387
 add_custom_command(

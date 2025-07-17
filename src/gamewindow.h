@@ -3,11 +3,11 @@
 
 #include <QWidget>
 #include <QStackedLayout>
-#include "startwidget.h"
-#include "boardwidget.h"
-#include "cluewidget.h"
-#include "resultswidget.h"
-#include "cluefile.h"
+#include <startwidget.h>
+#include <boardwidget.h>
+#include <cluewidget.h>
+#include <resultswidget.h>
+#include <cluefile.h>
 
 class GameWindow : public QWidget {
     Q_OBJECT
