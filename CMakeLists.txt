@@ -12,10 +12,7 @@ qt_standard_project_setup()
 
 if(GH_ACTIONS)
     include(FetchContent)
-    FetchContent_Declare(json
-    GIT_REPOSITORY https://github.com/nlohmann/json
-    GIT_TAG v3.12.0
-    )
+    FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz)
     FetchContent_MakeAvailable(json)
 else()
     find_package(nlohmann_json 3.12.0 REQUIRED)
