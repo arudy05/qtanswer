@@ -2,12 +2,24 @@ cmake_minimum_required(VERSION 3.16)
 
 project(qtanswer VERSION 0.3.1 LANGUAGES CXX)
 
+option(GH_ACTIONS "Enable stuff to make this run on GitHub Actions" OFF)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
-find_package(nlohmann_json 3.12.0 REQUIRED)
 qt_standard_project_setup()
+
+if(GH_ACTIONS)
+    include(FetchContent)
+    FetchContent_Declare(json
+    GIT_REPOSITORY https://github.com/nlohmann/json
+    GIT_TAG v3.12.0
+    )
+    FetchContent_MakeAvailable(json)
+else()
+    find_package(nlohmann_json 3.12.0 REQUIRED)
+endif()
 
 add_subdirectory(src)
 add_subdirectory(src/wrappers)
