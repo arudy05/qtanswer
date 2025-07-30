@@ -7,6 +7,14 @@ qt_add_library(player STATIC
 qt_add_library(tile STATIC
     tile.cc)
 
+# Fetch nlohmann_json library
+include(FetchContent)
+FetchContent_Declare(json
+    GIT_REPOSITORY https://github.com/nlohmann/json
+    GIT_TAG v3.12.0
+)
+FetchContent_MakeAvailable(json)
+
 target_link_libraries(buzzer PRIVATE Qt6::Widgets)
 target_link_libraries(cluefile PRIVATE Qt6::Widgets nlohmann_json::nlohmann_json)
 target_link_libraries(player PRIVATE Qt6::Widgets)
