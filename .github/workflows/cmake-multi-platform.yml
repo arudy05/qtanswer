@@ -78,14 +78,14 @@ jobs:
       run: ctest --build-config ${{ matrix.build_type }}
 
     - name: Upload build (Windows)
-      if: ${{ contains( matrix.os, windows ) }}
+      if: ${{ contains( matrix.os, 'windows' ) }}
       uses: actions/upload-artifact@v4
       with:
         name: Windows x64
         path: D:\a\qtanswer\qtanswer\build\Release\qtanswer.exe
 
     - name: Upload build (Linux)
-      if: ${{ contains( matrix.os, ubuntu ) }}
+      if: ${{ contains( matrix.os, 'ubuntu' ) }}
       uses: actions/upload-artifact@v4
       with:
         name: Linux x64
