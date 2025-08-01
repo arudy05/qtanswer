@@ -33,9 +33,6 @@ jobs:
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-          - os: ubuntu-latest
-            c_compiler: clang
-            cpp_compiler: clang++
         exclude:
           - os: windows-latest
             c_compiler: gcc
@@ -43,6 +40,8 @@ jobs:
             c_compiler: clang
           - os: ubuntu-latest
             c_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: clang
 
     steps:
     - uses: actions/checkout@v4
@@ -77,3 +76,18 @@ jobs:
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
+
+    - name: Upload build (Windows)
+      if: ${{ contains( matrix.os, windows ) }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: Windows x64
+        path: D:\a\qtanswer\qtanswer\build\Release\qtanswer.exe
+
+    - name: Upload build (Linux)
+      if: ${{ contains( matrix.os, ubuntu ) }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: Linux x64
+        path: /home/runner/work/qtanswer/qtanswer/build/src/qtanswer
+      
