@@ -18,4 +18,4 @@ cmake --build .
 The executable can be found at `<REPOSITORY LOCATION>/qtanswer/build/src/qtanswer`.
 
 ## categories.json
-A template categories.json file is included in the repository. This file must be present in the directory you are running the qtanswer executable from, otherwise the program will crash (this will be fixed later). You can edit this file to your heart's content as long as you maintain its structure.
+A template categories.json file is included in the repository. This file contains all categories, questions and answers for the game. You can edit this file to your heart's content as long as you maintain its structure.
