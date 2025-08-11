@@ -2,6 +2,7 @@
 
 
 Tile::Tile(int val, int cat): value{val}, category{cat}, button{new QPushButton(QString::number(val))} {
+    button->setObjectName("tile");
     connect(button, SIGNAL (clicked(bool)), this, SLOT (onButtonPress()));
     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }

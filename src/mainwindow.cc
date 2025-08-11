@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}, game{new GameWindo
     connect(aboutQt, SIGNAL (triggered()), this, SLOT (displayAboutQtInfo()));
 
     connect(game, SIGNAL (displayMenuBar(bool)), this, SLOT (toggleMenuBar(bool)));
+
+    // style time oh boy
+    setStyleSheet("QPushButton#tile { background-color: #010D8C; color: #D69F4C }");
 }
 
 void MainWindow::displayAboutInfo() {
