@@ -7,11 +7,17 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}, game{new GameWindo
     setCentralWidget(game);
     connect(game, SIGNAL (quit()), this, SLOT (close()));
 
+    QMenu *fileMenu = menuBar()->addMenu("File");
+    QAction *quit   = fileMenu->addAction(QIcon::fromTheme(QIcon::ThemeIcon::WindowClose),
+                                          "Quit");
+
     QMenu *helpMenu = menuBar()->addMenu("Help");
     QAction *about   = helpMenu->addAction(QIcon::fromTheme(QIcon::ThemeIcon::HelpAbout),
-                        "About this program");
+                                           "About this program");
     QAction *aboutQt = helpMenu->addAction(QIcon::fromTheme(QIcon::ThemeIcon::HelpFaq),
-                        "About Qt");
+                                           "About Qt");
+
+    connect(quit,    SIGNAL (triggered()), this, SLOT (close()));
     connect(about,   SIGNAL (triggered()), this, SLOT (displayAboutInfo()));
     connect(aboutQt, SIGNAL (triggered()), this, SLOT (displayAboutQtInfo()));
 
